@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h2 v-for="(val, i) in arr" :key="i"> {{ val }} </h2>
+        <button @click="change">배열 요소값 변경</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                change () {
+                    /*
+                    배열 사용시 주의사항
+                    (1) 배열 [i] = '값' 형식으로 변경 => rendering X
+                    (2) 배열.length = '값' => rendering X
+                    */
+                   this.arr[0] = 100;
+                   /* 
+                   해결방법
+                   (1) Vue.set(object, key, value) 를 이용해서 변경.
+                   Vue.set(this.arr, 0, 100);
+                   (2) this.$set(object, key, value) 를 이용해서 변경.
+                   this.$set(this.arr, 0, 50);
+                  (3) splice() 사용하여 변경
+                  this.arr.splice(0, 1, 500);
+                  (4) 배열 사본을 만들어 수정한 뒤 재할당
+                     => ES6 (spread 연산자)
+                   */
+                  var arr_copy = [...this.arr, 70];
+                  arr_copy[0] = 800;
+                  this.arr = arr_copy;
+                }
+            },
+            data () {
+                return {
+                    arr: [1, 2, 3],
+                    arr2: [
+                        { name: '홍', pw: 10 },
+                        { name: '김', pw: 20 },
+                    ]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

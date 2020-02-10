@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+    <style>
+        #app {
+            width: 150px;
+            height: 150px;
+            text-align: center;
+        }
+        #app.ready {
+            background-color: palegreen;
+            color: blue;
+        }
+        #app.active {
+            background-color: tomato;
+            color: white;
+            border-radius: 30%;
+        }
+        #app.done {
+            background-color: yellow;
+            color: green;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" :class="state" @click="change">
+        {{ msg }}
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data(){
+                return {
+                    msg: 'ready',
+                    state: 'ready'
+                }
+            },
+            methods: {
+                change(){
+                    var val = this.state
+                    if (val === 'ready') {
+                        this.state = 'active'
+                    } else if (val === 'active') {
+                        this.state = 'done'
+                    } else if (val === 'done') {
+                        this.state = 'ready'
+                    }
+                    this.msg = this.state
+                }
+            }
+        })
+    </script>
+</body>
+</html>

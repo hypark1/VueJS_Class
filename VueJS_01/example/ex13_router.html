@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <h1>뷰 라우터 활용</h1>
+    <div id="app">
+        <h1>Home Page</h1>
+        <p>
+            <router-link to="/main">Main 컴포넌트</router-link>
+            <router-link to="/login">Login 컴포넌트</router-link>
+        </p>
+        <hr color="red">
+        <!-- router-link를 클릭하면 router-view에 해당 컴포넌트가 출력된다. -->
+        <router-view></router-view>
+    </div>
+    <script>
+        /* 
+        1. Main, Login 컴포넌트 정의
+        2. url에 맞는 위 컴포넌트 등록
+        3. 뷰 라우터 정의 (VueRouter객체 생성)
+        4. 뷰 라우터를 뷰 인스턴스에 등록
+        */
+       var Main = {
+           template: `<div><h1>Main Page</h1></div>`
+       }
+       var Login = {
+           template: `<div><h1>Login Page</h1></div>`
+       }
+
+       var routes = [
+           { path: '/main', component: Main },
+           { path: '/login', component: Login },
+       ];
+
+       var router = new VueRouter({
+           mode: 'history',
+          //routes: routes
+          routes
+       });
+
+        new Vue({
+            el: '#app',
+            router: router,// = router
+        })
+    </script>
+</body>
+</html>

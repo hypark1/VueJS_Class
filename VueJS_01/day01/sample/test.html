@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue">
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+
+        <h2 v-for="(val, i) in arr" :key="i">{{val}}</h2>
+        <button v-on:click="onClickChange">change</button>
+        <hr>
+        <div v-for="(item, index) in arr2" :key="index">
+            {{ item.first }} {{ item.bool }}
+          </div>
+    </div>
+    <script>
+        new Vue({
+            data() {
+                return {
+                    msg: 'test',
+                    arr: [1, 2, 3],
+                    arr2: [
+                        { first: 1, bool: true },
+                        { second: 2, bool: false },
+                    ],
+                }
+            },
+            methods: {
+                onClickChange() {
+                    // alert('a')
+                    //this.arr[0]=10;
+                    //배열 인덱스 지정하여 수정하면 렌더링 되지 않음
+                    //Vue.set(object, key, value)
+                    //[1] Vue.set(this.arr,0,10);
+                    //[2] this.$set(this.arr,0,100)
+                    //[3] 배열 사본을 만들어 수정한 뒤 재할당
+                    // let arr_copy=[...this.arr];
+                    // arr_copy[0]=300;
+                    // this.arr=arr_copy;
+                    //[4] 또는 splice()
+                    //example1.items.splice(indexOfItem, 1, newValue)
+                    this.arr.splice(0, 1, 500)
+                }
+            }
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>

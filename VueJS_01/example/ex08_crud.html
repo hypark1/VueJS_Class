@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue/dist/vue.min.js"></script>
+    <style>
+        .strong {
+            color: red;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Create Read Update Delete</h1>
+        Name : <input type="text" ref="myinput" v-model="user.name">
+        <p></p>
+        Power : <input type="text" v-model="user.power">
+        <br>
+        <button @click="insert">Add</button>
+        <hr>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>NAME</td>
+                <td>POWER</td>
+                <td>CRUD</td>
+            </tr>
+            <tr v-for="(man, index) in list" :key="man.id"
+                :class="{ strong: man.power > 300 }">
+                <td>{{ man.id }}</td>
+                <td>{{ man.name }}</td>
+                <td>{{ man.power }}</td>
+                <td>
+                    <button @click="doDel(index)">Del</button>
+                    <button @click="doUp(index)">Power UP</button>
+                    <button @click="doDown(index)">Power Down</button>
+                    <button @click="doEdit(index)">Edit</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            mounted () {
+                this.$refs.myinput.focus();
+            },
+            methods: {
+                insert () {
+                    if(this.user.name === '') {
+                        alert('이름을 입력하세요.');
+                        this.$refs.myinput.focus();
+                        return;
+                    }
+                    /* array.reduce(function(prev, current)){
+                        최소
+                        return prev > current ? current : prev;
+                        최대
+                        return prev > current ? prev : current;
+                    } */
+                    var max = this.list.reduce(function(a, b){
+                        return a.id > b.id ? a.id : b.id;
+                    })
+                    var newUser = {
+                        id: max +1,
+                        name: this.user.name,
+                        power: this.user.power,
+                        flag: false
+                    }
+                    this.list.push(newUser)
+                },
+                doUp (idx) {
+                    this.list[idx].power += 100
+                },
+                doDown (idx) {
+                    this.list[idx].power -= 50
+                },
+                doDel (idx) {
+                    //배열에서 추가 => arr.push()
+                    //배열에서 삭제 => arr.splice(index, count, newElement)
+                    this.list.splice(idx, 1)
+                },
+                doEdit (idx) {
+                    this.user = this.list[idx]
+                }
+            },
+            data () {
+                return {
+                    user: {
+                        id: 0,
+                        name: '',
+                        power: 0,
+                        flag: false
+                    },
+                    list: [
+                        { id: 1, name: '슈퍼맨', power: 100, flag: false },
+                        { id: 2, name: '아쿠아맨', power: 300, flag: false },
+                        { id: 3, name: '스파이더맨', power: 500, flag: false },
+                        { id: 4, name: '배트맨', power: 30, flag: false },
+                    ]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

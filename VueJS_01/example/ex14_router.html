@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Router Sample</title>
+    <style>
+        body{
+            padding:10px;
+            margin:10px;
+        }
+        div{
+            text-align: center;
+        }
+        .bg1{
+            background-color: bisque;
+        }
+        .bg2{
+            background-color: palegreen;
+        }
+        .bg3{
+            background-color:yellow;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>중첩 뷰 라우터 예제</h1>
+      <p>
+        <router-link to="/main">Main 컴포넌트로 이동</router-link>
+        <router-link to="/login">Login 컴포넌트로 이동</router-link>
+        <router-link to="/user">User 컴포넌트로 이동</router-link>
+      </p>
+      <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script>
+      // 3. Main. Login 컴포넌트 내용 정의 
+      var Main = { template: `<div class='bg1'>
+                                    <h1>Main Page</h1>
+                                </div>` };
+      var Login = { template: `<div class='bg2'>
+                                    <h1>login Page</h1>
+                                </div>` };
+      var User={
+          template:`
+                <div class="bg3">
+                    <h1>User Page</h1>
+                    <router-link to="/profile">User Profile</router-link>
+                    <router-link to="/post">User Post</router-link>
+                    <hr color='blue'>
+                    <router-view></router-view>
+                </div>
+            `
+      }                                
+      var UserProfile = { template: '<p class="bg1">User Profile Component</p>' };
+      var UserPost = { template: '<p class="bg2">User Post Component</p>' };
+      // 4. 각 url에 해당하는 컴포넌트 등록
+      var routes = [
+        { path: '/main', component: Main },
+        { path: '/login', component: Login},
+        { path: '/user', 
+                component:User,
+                children:[
+                    {path:'/profile', component:UserProfile},
+                    {path:'/post', component:UserPost},
+                ]
+                
+        }// /user 요청시 end
+      ];
+
+      // 5. 뷰 라우터 정의
+      var router = new VueRouter({
+        //mode:'history',
+        routes
+      });
+
+      // 6. 뷰 라우터를 인스턴스에 등록
+      var app = new Vue({
+          el:'#app',
+          router:router
+      });//.$mount('#app');
+    </script>
+  </body>
+</html>

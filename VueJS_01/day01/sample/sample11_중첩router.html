@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Router Sample</title>
+    <style>
+        body{
+            padding:10px;
+            margin:10px;
+            text-align:center;
+        }
+    
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>중첩 뷰 라우터 예제</h1>
+      <p>
+        <router-link to="/main">Main 컴포넌트로 이동</router-link>
+        <router-link to="/login">Login 컴포넌트로 이동</router-link>
+        <router-link to="/user">User 컴포넌트로 이동</router-link>
+      </p>
+      <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script>
+      // 3. Main. Login 컴포넌트 내용 정의 
+      var Main = { template: `<div>
+                                    <h1>Main Page</h1>
+                                </div>` };
+      var Login = { template: `<div>
+                                    <h1>login Page</h1>
+                                </div>` };
+      
+      //[실습]                               
+      //User 컴포넌트 내용 정의하여 등록해보자.
+
+      // 4. 각 url에 해당하는 컴포넌트 등록
+      var routes = [
+        { path: '/main', component: Main },
+        { path: '/login', component: Login},
+        //이부분에 user컴포넌트와 path매핑 이때 하위 컴포넌트도 함께 매핑
+      ];
+
+      // 5. 뷰 라우터 정의
+      var router = new VueRouter({
+          //mode:'history',
+        routes
+      });
+
+      // 6. 뷰 라우터를 인스턴스에 등록
+      var app = new Vue({
+          el:'#app',
+          router:router
+      });//.$mount('#app');
+    </script>
+  </body>
+</html>

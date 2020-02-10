@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+    <style>
+        div{
+            padding: 8px;
+            border:1px solid rebeccapurple
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Vue Root-형제간에 통신시에는 eventBus를 이용한다.</h1>
+        <my-comp></my-comp>
+        <your-comp v-bind:data1="data1"></your-comp>
+        <his-comp></his-comp>
+    </div>
+    <script>
+        var eventBus = new Vue(); //이벤트 버스
+        var myComp = {
+            template: '<div v-on:click="pass">MyComp</div>',
+            data () {
+                return {
+                    msg: 'myData'
+                }
+            },
+            methods: {
+                pass () {
+                    //형제에게 데이터 전달시
+                    eventBus.$emit('go', "myComp가 보내는 데이터 => " + this.msg)
+                    //형제가 받을때는 eventBus.$on('이벤트종류', 콜백함수)
+                }
+            }
+        }
+        var yourComp = {
+            template: '<div>YourComp {{msg}} </div>',
+            data () {
+                return {
+                    msg: 'yourData'
+                }
+            },
+            props: ['data1'],
+            mounted () {
+                // 여기 this 는 yourComp객체.
+                var vm = this;
+                eventBus.$on('go', function(val){
+                    // 여기서 this 는 eventBus객체.
+                    vm.msg = val;
+                })
+            }
+            
+        }
+        var hisComp = {
+            template:'<div>HisComp {{msg}} </div>',
+            data(){
+                return{
+                    msg:'hisData'
+                }
+            },
+            created(){
+            }
+        }
+        new Vue({
+            el:'#app',
+            data(){
+                return{ data1:''}
+            },
+            components:{
+                'my-comp':myComp,
+                yourComp,
+                hisComp
+            },
+            methods:{
+                show(val){
+                    //alert(val)
+                    this.data1=val;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

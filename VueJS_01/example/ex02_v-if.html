@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-if="!showMe" v-on:click="change">Click Me</div>
+        <button v-else @click="change">까꿍,,</button>
+        <hr>
+        <template v-if="showMe">
+            <h1>안녕</h1>
+            <p>반가워</p>
+            <button>Hello</button>
+        </template>
+        <template v-else>
+            <h1>하이</h1>
+            <p>Good</p>
+        </template>
+        <hr>
+        <button v-show="!showMe" @click="change">v-show Test</button>
+        <!-- v-if : 조건이 false일 경우 삭제됨.
+                    template 엘리먼트에 사용 가능
+             v-show : style의 display속성을 변경하여 보여주고 감춘다.
+                      template 엘리먼트에 사용 불가 -->
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                //데이터
+                showMe: false
+            },
+            methods: {
+                //함수
+                change: function(){
+                    this.showMe = !this.showMe;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

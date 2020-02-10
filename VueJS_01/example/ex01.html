@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+   <h1>Vue JS</h1>
+   <div id="app">
+       <h2> {{msg}} </h2>
+   </div>
+   <script>
+       var vm = new Vue({
+           el:'#app',
+           data:{
+               msg:"Hello Vue JS"
+           }
+       });
+   </script>
+   <hr color='red'>
+   <div id="app2">
+       
+    </div>
+    <script>
+        //view
+        var div = document.getElementById('app2');
+        //model
+        var vm2 = {};
+        Object.defineProperty(vm2,'str',{
+            get:function(){
+                console.log('get');
+            },
+            set:function(val){
+                div.innerHTML = val;
+            }
+        })
+    </script>
+</body>
+</html>

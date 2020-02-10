@@ -1,0 +1,209 @@
+--Header.vue-----------------------------------------------------------
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>My First Vue App</h1>
+  <p>Resize this responsive page to see the effect!</p> 
+</div>
+-------------------------------------------------------------
+
+---Nav.vue----------------------------------------------------------
+<nav class="navbar navbar-expand-sm bg-warning navbar-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+        
+      <li class="nav-item">
+          <router-link to="/" class="nav-link">HOME</router-link>
+        <!-- <a class="nav-link" href="#">HOME</a> -->
+      </li>
+      <li class="nav-item">
+         <router-link to="#"  class="nav-link  text-success">a님 로그인중...</router-link>
+      </li>   
+      <li class="nav-item">
+         <router-link to="/login" class="nav-link">Login</router-link>
+         <router-link to="/logout" class="nav-link">Logout </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/signup" class="nav-link">SignUp</router-link>
+      </li>    
+      <li class="nav-item">
+        <router-link to="/memo" class="nav-link">Memo</router-link>
+      </li>    
+    </ul>
+  </div>  
+
+</nav>
+-------------------------------------------------------------
+
+
+--Login.vue-----------------------------------------------------------
+<div class="container p-5">
+        <h1>Login</h1>
+                <div class="text-danger"> </div>
+        <form name="loginF" action="login.jsp" v-on:submit.prevent="loginCheck">
+        <div class="row">    
+            <div class="col-md-6 offset-md-3">
+                
+                User ID: <input type="text" name="userId" 
+                placeholder="User ID Name" class="form-control" >    
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-md-6 offset-md-3">
+                PASSWORD: <input type="password" name="userPwd" 
+                placeholder="Password" class="form-control">    
+            </div>
+        </div>
+        <div class="col-md-6 offset-md-3 p-1">
+                <button class="btn btn-block btn-primary mt-3">Login</button>
+        </div>        
+        </form>    
+    </div>
+-------------------------------------------------------------
+
+---SignUp.vue--------------------------------------------------------
+<div>
+        <div><h1>처리 중...</h1></div>
+        <div id="join" class="container p-3">
+            <h1>SingUp</h1>
+            <form name="frm" action="join.jsp">
+        <div class="row">    
+            <div class="col-md-6 offset-md-3">
+			
+            Name: <input type="text" name="userName"
+             placeholder="Nick Name" class="form-control"> 
+
+            
+            </div>
+        </div>
+        <div class="row">    
+            <div class="col-md-6 offset-md-3">
+			
+            Nick Name: <input type="text" name="userNick"
+             placeholder="User ID" class="form-control"> 
+    
+            <div  class="text-danger">아이디는 4자이상 6자 이하 입니다.</div>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-md-6 offset-md-3">
+                PASSWORD: <input type="text" name="userPwd" 
+                placeholder="Password" class="form-control">    
+                <div class="text-danger">비밀번호는 4자 이상 8자 이내입니다.</div>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-md-6 offset-md-3">
+                    PASSWORD Confirm :
+                <input type="text" name="userPwd" placeholder="Password Confirm" class="form-control" >    
+                <div class="text-danger">비밀번호가 일치하지 않아요</div>
+            </div>       
+        </div> 
+        <div class="row"> 
+                <div class="col-md-6 offset-md-3">
+                        Tel :
+                    <input type="text" name="userTel" placeholder="Phone" class="form-control">    
+                </div>       
+            </div> 
+        <div class="row"> 
+                <div class="col-md-6 offset-md-3">
+                        Address :
+                    <input type="text" name="userAddr" placeholder="Address" class="form-control">    
+                </div>       
+            </div>     
+        <div class="row  m-2">
+                <div class="col-md-6 offset-md-3 p-1">
+                    <button class="btn btn-block btn-outline-success">Signup</buttoN>
+                </div>
+        </div>
+
+        <div class="row m-5">
+            <div class="col-md-6 offset-md-3">
+
+            </div>
+			
+        </div>
+        </form>
+    </div>    
+    </div>
+-------------------------------------------------------------
+
+-----MemoApp.vue--------------------------------------------------------
+<div class="row m-5">
+    <!-- 여기에 컴포넌트들 들어갈 예정-->
+ </div>
+-------------------------------------------------------------
+
+--IntroContent.vue-----------------------------------------------------------
+<div class="col-md-3 col-sm-12 col-xs-12 p-3">
+    <div class="card">
+        <img src="images/img02.png" class="card-img-top img img-thumbnail"/>
+        <div class="card-body text-center">
+            <h3 class="card-title">한줄 메모장 </h3>
+            <p class="card-text">Memo Your Life~</p>                    
+            <a href="#" class="btn btn-outline-primary">Memo</a>
+        </div>
+    </div>                
+</div>
+----CreateContent.vue-------------------------------------------------
+<div class="col-md-3 col-sm-12 col-xs-12 p-3">
+     <div class="card" style="height: 350px">
+         <div class="card-header text-center">
+         <h3 class="text-center text-success">Add Memo</h3>
+         </div>
+         <div class="card-body text-center">
+         <form action="memoAdd.jsp" method="post">
+             <input type="text"
+              name="title" placeholder="제  목" class="form-control">
+              <p>
+             <textarea name="msg" placeholder="메모 내용" class="form-control"></textarea>
+             </p>
+             <button class="btn btn-outline-success">글쓰기</button>
+         </form> 
+         </div>
+         
+     </div> 
+ </div>
+-------------------------------------------------------------
+
+----ListContent.vue------------------------------------------------------
+<div class="col-md-3 col-sm-12 col-xs-12 p-3">
+
+    <div class="card">
+    <ul class="list-group">
+    <li class="list-group-item active d-flex justify-content-between align-items-center">
+    Memo List
+        <span class="badge badge-danger badge-pill">2019-12-01</span>
+    </li>        
+    <li class="list-group-item d-flex justify-content-between align-items-center">                   
+        <a href="#" >제목</a>
+        <span class="badge badge-danger badge-pill">작성일</span>
+    </li>         
+    </ul>
+
+    </div>                
+</div>
+-------------------------------------------------------------
+
+-----ViewContent.vue--------------------------------------------------------
+<div class="col-md-3 col-sm-12 col-xs-12 p-3" >
+    <div class="card" >
+        <img src=""  class="card-img-top img img-thumbnail" />
+        <div class="card-img-overlay text-center">
+			<form action="memoEdit.jsp" method="post" class="mt-2">
+				<input type="hidden" name="no"><p></p>
+				<input type="text" name="title" placeholder="제목"  class="form-control" >
+				<p></p>
+				<textarea name="msg" placeholder="메모내용" class="form-control mt-2"></textarea>
+				<span class="badge badge-success">작성일: a	</span><p></p>
+				<button type="submit" class="btn btn-outline-info">글수정</button>
+			</form> 
+		</div>
+    </div> 
+</div>
+-------------------------------------------------------------
+
+-------------------------------------------------------------
+

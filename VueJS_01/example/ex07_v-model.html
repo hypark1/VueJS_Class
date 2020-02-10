@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>v-model</h1>
+        <h2>form에 입력한 값을 뷰 객체의 데이터에 즉시 동기화 시킨다.</h2>
+        <h3>input, select, textarea, checkbox, radio 등 태그에만 사용 가능</h3>
+        <hr>
+
+        <input type="text" v-model="name"><br>
+        당신의 이름은 : {{ name }}<br><br>
+
+        <input type="checkbox" value="VueJS" v-model="langs"> VueJS
+        <input type="checkbox" value="ReactJS" v-model="langs"> ReactJS
+        <input type="checkbox" value="NodeJS" v-model="langs"> NodeJS
+        <input type="checkbox" value="JS" v-model="langs"> JS
+        <br>
+        사용 가능한 언어는 : {{ langs }}
+    </div>
+    <script>
+        new Vue({
+            data(){
+                return {
+                    name: '',
+                    langs: []
+                }
+            }
+        }).$mount('#app')
+    </script>
+</body>
+</html>

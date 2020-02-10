@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>v-for 이용</h1>
+        <ul>
+            <li v-for="(val, index) in arr"> {{ index }} => {{ val }} </li>
+        </ul>
+        <hr>
+
+        <h1>key = value 형태</h1>
+        <ul>
+            <li v-for="(val, key, index) in regions" :key="key">
+                {{ key }} => {{ val }} => {{ index }}
+            </li>
+        </ul>
+        <hr>
+        
+        <div v-for="val in idols" :key="val.no" v-if="val.no > 2">
+            <h1> {{ val.name }} - {{ val.title }} </h1>
+            <img :src="val.img">
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                arr: [10, 20, 30],
+                idols:[
+                    {no:1, name:'BTS', title:'정말 멋진 BTS', img:'./images/bts.PNG'},
+                    {no:2, name:'AOA', title:'아주 멋진 AOA', img:'./images/aoa.PNG'},
+                    {no:3, name:'BlackPink', title:'제일 멋진 BlackPink', img:'./images/blackpink.PNG'},
+                    {no:4, name:'WannoOne', title:'최고 멋진 WannaOne', img:'./images/wanaone.PNG'}
+                ],
+                regions: {
+                    "A" : "Asia",
+                    "B" : "Americal",
+                    "C" : "Europe",
+                    "D" : "Africa"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+    <style>
+        .good{
+            background-color: tomato;
+            color: yellow;
+            font-size: 2em;
+        }
+        .bad{
+            background-color: palegreen;
+            color: blue;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>directive란 html태그 안에 v-접두사를 가지는 모든 속성을 의미한다.</h1>
+    <h2>v-bind는 html태그의 기본속성과 Vue테이터 속성을 연결할 때 사용한다.</h2>
+    <h2>v-bind는 ":속성" 으로 축약이 가능하다.</h2>
+    <hr>
+
+    <div id="app">
+        <input type="text" v-bind:placeholder="msg"><br>
+        <input type="text" :value="msg"><br><br>
+        <img :src="imgpath" :width="imgW" :height="imgH" />
+        <hr color="blue">
+        
+        <h2>클래스 바인딩</h2>
+        <div :class="{good: visible, bad: !visible}">div</div>
+        <button @click="change">click {{ btnTxt }}</button>
+        <hr>
+
+        <h2>스타일 바인딩</h2>
+        <div :style="{color: 'blue',fontSize: '20px'}">div2</div>
+        <div :style="{border: (visible) ? 'thick dashed red' : 'thin solid green'}">div3</div>
+    </div>
+    <script>
+        new Vue({
+            data: {
+                msg: '이름을 입력하세요.',
+                imgpath: 'images/bts.PNG',
+                imgW: 200,
+                imgH: 150,
+                visible: false,
+                btnTxt: '.good'
+            },
+            methods: {
+                change: function(){
+                    this.visible = !this.visible;
+                    this.btnTxt = this.visible ? 'bad' : 'good';
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

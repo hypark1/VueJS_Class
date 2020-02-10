@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+    <style>
+        div {
+            padding: 10px;
+            border: 1px solid silver;
+        }
+    </style>
+</head>
+<body>
+    <h1>지역 컴포넌트 사용</h1>
+    <div id="app">
+        <my-comp title="지역 컴포넌트"
+                :message="msg"
+                v-on:pass-over="show"
+                v-on:count="show"
+        ></my-comp>
+    </div>
+    <hr color="red">
+
+    <div id="app2">
+        <!-- <my-comp title="지역 컴포넌트2" message="이벤트를 통해 부모에게 데이터 전달"></my-comp> -->
+    </div>
+    <script>
+        //컴포넌트 정의
+        var myComponent = {
+            template: `
+                        <div>
+                            MyComponent Child
+                            <h2 @click="pass">{{ title }}</h2>
+                            <h3>{{ message }}</h3>
+                            <button @click="count">Count</button>
+                        </div>
+                    `,
+            props: [ 'title', 'message' ], //부모가 전달한 속성을 명시적으로 기술한다.
+            data () {
+                return {
+                    str: 'From myComponent',
+                    num: Math.floor(Math.random() *100 +1)
+                }
+            },
+            methods: {
+                pass () {
+                    //this.$emit('이벤트 종류', 데이터, ...)
+                    this.$emit('pass-over', this.str);
+                    //부모의 my-comp 엘리먼트에서 v-on:pass-over="핸들러함수명"
+                },
+                count () {
+                    this.$emit('count', this.num);
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data () {
+                return {
+                    msg: 'root parent data #app'
+                }
+            },
+            //지역 컴포넌트 등록 => 해당 뷰 인스턴스 범위 내에서만 사용 가능
+            components: {
+                'my-comp': myComponent
+            },
+            methods: {
+                show (val) {
+                    this.msg = val;
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app2'
+        })
+    </script>
+</body>
+</html>

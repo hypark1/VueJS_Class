@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <!-- 여기에 idols를 v-for  이용해 출력해보자 -->
+    </div>
+    <script>
+        
+        new Vue({
+            el:'#app',
+            data:{
+                idols:[
+                    {no:1,name:'BTS',title:'정말 멋진 BTS',img:'./images/bts.PNG'},
+                    {no:2,name:'AOA',title:'아주 멋진 AOA',img:'./images/aoa.PNG'},
+                    {no:3,name:'BlackPink',title:'제일 멋진 BlackPink',img:'./images/blackpink.PNG'},
+                    {no:4,name:'WannoOne',title:'최고 멋진 WannaOne',img:'./images/wanaone.PNG'}
+                ],
+				
+            }
+        })
+    </script>
+</body>
+</html>

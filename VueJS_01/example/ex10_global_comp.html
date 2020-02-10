@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue"></script>
+    <style>
+        div {
+            padding: 10px;
+            border: 1px solid silver;
+        }
+    </style>
+</head>
+<body>
+    <h1>전역 컴포넌트 사용</h1>
+    <div id="app">
+        {{ msg }}
+        <my-component title="즐거운 하루" :message="msg"></my-component>
+        <!-- 
+            부모는 title 이라는 속성으로 my-component 에게 데이터를 전달.
+            그러면 자식에서는 props라는 속성을 추가하고 해당 속송명을 기술한다.
+            *주의사항: 자식은 props를 수정할 수 없다. readonly.
+        -->
+    </div>
+    <hr color="red">
+
+    <div id="app2">
+        나도 부모 app2
+        <my-component></my-component>
+    </div>
+    <script>
+        //컴포넌트 정의
+        var myComponent = {
+            template: `
+                        <div>
+                            MyComponent Child
+                            <h2>{{ title }}</h2>
+                            <h3>{{ message }}</h3>
+                        </div>
+                    `,
+            props: [ 'title', 'message' ] //부모가 전달한 속성을 명시적으로 기술한다.
+        }
+        /* 전역 컴포넌트로 등록
+        => 컴포넌트 이름은 2단어 이상으로 한다(필수)
+        => 케밥 표기법으로(-) */
+        Vue.component('my-component', myComponent);
+        new Vue({
+            el: '#app',
+            data () {
+                return {
+                    msg: 'root parent data #app'
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app2'
+        })
+    </script>
+</body>
+</html>
