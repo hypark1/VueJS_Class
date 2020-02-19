@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="getData">Data 가져오기</button>
+        <div v-for="(movie, index) in movies" :key="movie.id">
+            <img :src="movie.medium_cover_image">
+            <h3>{{movie.title}}</h3>
+            <h4>rating: [ {{movie.rating}} ]</h4>
+        </div>
+    </div>
+    <script>
+        new Vue ({
+            el: '#app',
+            data () {
+                return {
+                    movies: []
+                }
+            },
+            methods: {
+                getData () {
+                    var req = new XMLHttpRequest();
+                    // open('요청방식', url) get, post
+                    var url = 'list_movies.json';
+                    var vm = this; //vm에 Vue인스턴스를 참조하도록 할당
+                    req.open('GET', url);
+                    req.onload = function () {
+                        //JSON형태의 문자열을 JSON객체로 만들어서 반환
+                        var res = JSON.parse(req.responseText);
+                        vm.movies = res.data.movies;
+                    }
+                    //send() => 요청 전송
+                    req.send();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

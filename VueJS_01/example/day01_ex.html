@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1. Vue data 정의
+        arr = [
+            ['사과', '배', '포도'],
+            ['딸기', '키위', '감']
+        ]
+        2. 전역 컴포넌트로
+        - TableComp : props로 'row-data' => arr을 전달
+        - TrComp : props로 'col-data', 'row-index'
+        - TdComp : props로 'my-data', 'row-index', 'col-index'
+    -->
+    <div id="app">
+        <table-comp :row-data="arr"></table-comp>
+    </div>
+    <script>
+        var TableComp = {
+            template: `<table><tr-comp :col-data="val" :row-index="index" v-for="(val, index) in rowData" :key="index"></tr-comp></table>`,
+            props: [ 'row-data' ]
+        }
+        var TrComp = {
+            template: `<tr><td-comp :my-data="val" :row-index="index" v-for="(val, index) in colData" :key="index"></td-comp></tr>`,
+            props: [ 'col-data', 'row-index' ]
+        }
+        var TdComp = {
+            template: `<td>{{ myData }}</td>`,
+            props: [ 'my-data', 'row-index' ]
+        }
+        Vue.component('table-comp', TableComp);
+        Vue.component('tr-comp', TrComp);
+        Vue.component('td-comp', TdComp);
+        new Vue({
+            el: '#app',
+            data () {
+                return {
+                    arr: [
+                        ['사과', '배', '포도'],
+                        ['딸기', '키위', '감']
+                    ]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

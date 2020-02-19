@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Axios 라이브러리 사용</h1>
+        <button @click="getData">Data 가져오기</button>
+        <div v-for="(movie, index) in movies" :key="movie.id">
+            <img :src="movie.medium_cover_image">
+            <h3>{{movie.title}}</h3>
+            <h4>rating: [ {{movie.rating}} ]</h4>
+        </div>
+    </div>
+    <script>
+        new Vue ({
+            el: '#app',
+            data () {
+                return {
+                    movies: []
+                }
+            },
+            methods: {
+                getData () {
+                    var vm = this;
+                    /*
+                    axios.get('url')
+                        .then(함수) => 응답 성공
+                        .catch(함수) => 에러 발생
+                    
+                    axios.post('url, params)
+                        .then()
+                        .catch()
+                     */
+                     axios.get('list_movies.json')
+                        .then(function(response){
+                            //alert(response.status)
+                            console.log(response.data);
+                            vm.movies = response.data.data.movies;
+                        })
+                        .catch(function(err){
+                            alert('error: ' + err.message);
+                        });
+                }
+            }
+        })
+    </script>
+</body>
+</html>

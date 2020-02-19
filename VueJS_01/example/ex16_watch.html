@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        메세지: <input type="text" v-model="message">
+        <h2>메세지: {{message}}</h2>
+        <h2 style="color:red">
+            reverseMessage: {{reverseMessage}}
+        </h2>
+    </div>
+    <script>
+        new Vue ({
+            el: '#app',
+            data () {
+                return {
+                    message: '',
+                    reverseMessage: ''
+                }
+            },
+            watch: {
+                message: function (newVal, oldVal) {
+                    console.log('newVal = ' + newVal)
+                    console.log('oldVal = ' + oldVal)
+                    this.reverseMessage = this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
