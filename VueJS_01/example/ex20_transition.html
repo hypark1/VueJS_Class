@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <style>
+        /* 
+        fade 효과 공통부분 기술
+        트랜지션
+        1. Enter: 나타날때
+            v-enter (opacity: 0) ====> v-enter-to (opacity: 1)
+                                v-enter-active
+                        나타나는 과정이 동작중인 상황
+        2. Leave: 사라질때
+            v-leave (opacity: 1) ===> v-leave-to (opacity: 0)
+                                v-leave-active
+                        사라지는 과정이 동작중인 상황
+
+            transition 에 name 을 지정하지 않으면 v-enter ,
+            name 지정하면 name-enter
+         */
+
+         .fade-enter-active, .fade-leave-active {
+             transition: all 1.5s;
+         }
+         .fade-enter, .fade-leave-to {
+             opacity: 0;
+         }
+         .fade-enter-to, fade-leave {
+             opacity: 1;
+         }
+
+         /* 바운스 효과주기 */
+         .my-enter-active {
+                animation: bounce-in 0.5s;
+                /* bounce-in keyframe 에서 정의된 이름을 의미 */
+         }
+         .my-leave-active {
+                animation: bounce-in 0.5s reverse;
+         }
+         @keyframes bounce-in {
+             0% {
+                 transform: scale(0);
+             }
+             50% {
+                 transform: scale(1.5);
+             }
+             100% {
+                 transform: scale(1);
+             }
+         }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition name="fade">
+            <h1 v-show="show">Hello VueJS</h1>
+        </transition>
+        <button @click="change">Click Me</button>
+        <hr color="red">
+        <transition name="my">
+            <h1 v-show="show2">안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕안녕</h1>
+        </transition>
+        <button @click="change2">Click</button>
+    </div>
+    <script>
+        new Vue ({
+            el: '#app',
+            data () {
+                return {
+                    show: true,
+                    show2: true
+                }
+            }, methods: {
+                change () {
+                    this.show = !this.show;
+                },
+                change2 () {
+                    this.show2 = !this.show2;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

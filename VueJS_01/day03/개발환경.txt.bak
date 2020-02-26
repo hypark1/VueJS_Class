@@ -1,0 +1,33 @@
+1. 개발환경 구축: 백엔드와 연동 준비
+
+(1) jdk설치(8.0)
+(2) 서버(Tomcat 설치)
+(3) Database(Oracle 11XE) 설치
+	=> db계정 생성 myvuedb/tiger
+(4) SQL Developer설치
+(5) 라이브러리 설치 : C:/Tomcat 8.5/webapps/ROOT/WEB-INF/lib/에 3개의 jar파일을
+			가져다 두자.
+
+	- ojdbc6.jar : 오라클 연동 드라이버
+	- cos.jar    : 파일 업로드 처리 라이브러리
+	- simple-json-1.1.1.jar : 데이터를 json으로 변환처리하는 라이브럴리
+
+2. 회원 가입 처리==> 회원 목록 보여주기
+
+3. 로그인 처리
+
+////////////////////////////////////////////////////
+cors 문제 해결방법
+https://github.com/winterguard/Study-Web/wiki/%ED%81%AC%EB%A1%9C%EC%8A%A4%EB%8F%84%EB%A9%94%EC%9D%B8-%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0-%EC%A0%84%EB%9E%B5---Cross-Domain
+1) Proxy이용 방법 => 백엔드 서버쪽에서 Java 등의 언어를 이용해서 해당 파일에 접근하여
+                    데이터를 받아와 같은 웹서버상에서 서비스 하는 방법
+2) jsonp이용방법 => callback함수 지정
+3) 서버쪽 response 헤더 설정방법 => 이 방법을 사용해보자.
+백엔드 쪽에서 
+Header에 있는 Access-Control-Allow 등을 변경하여 보내서 설정하는 방법.
+Java 기준으로 요청 받는 서버페이지(JSP)에서 아래와 같이 헤더 설정을 해줍니다.
+
+
+res.addHeader("Access-Control-Allow-Origin", "*");
+res.setHeader("Access-Control-Allow-Headers", "origin, x-requested-with, content-type, accept");
+

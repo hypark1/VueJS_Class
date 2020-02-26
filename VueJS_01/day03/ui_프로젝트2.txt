@@ -1,0 +1,177 @@
+===UserList.vue===========================
+<div class="table-responsive-sm mt-5">
+    <table class="table table-striped mt-2">
+        <tr  style="background:#efefef">
+            <th colspan="4">::회원 목록::</th>
+        </tr>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>Email</th>
+            <th>가입일</th>
+        </tr>
+
+        <tr>
+            <td> a </td>
+            <td> a </td>
+            <td> a </td>
+            <td> a </td>
+        </tr>
+    </table>
+  </div>
+=============================================
+
+==BoardWrite.vue=======================================
+<div class="container mt-5 mb-3">
+        <div class="row">
+            <div class="col-md-12 p-4" style="border:1px solid seagreen">    
+                <h1>Board POST</h1>            
+		<!--  파일 업로드시 주의사항
+			method는 post로
+			 enctype="multipart/form-data"
+		-->
+                <form id="bf" class="form" method="post">                    
+                    <input type="text" name="subject" id="subject"  
+                     class="form-control m-1" placeholder="Subject">
+                    <textarea name="content" placeholder="Content"
+                      class="form-control m-1"></textarea>
+                    <input type="file" ref="file" name="filename" id="filename"                   
+                     class="form-control m-1">
+                    
+                    <div class="col-md-6 offset-md-3 text-center">
+			<!--선택한 이미지 미리보기 -->
+                        <img src="" class="img img-thumbnail"></div>
+
+                    <button  class="btn btn-outline-danger m-1">글쓰기</button>
+                    <button  class="btn btn-danger m-1">Loading...</button>
+                </form>    
+                
+            </div> 
+        </div>
+    </div>
+====================================================
+
+===BoardList.vue==================================================
+<div class="container">
+      <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+            
+	<!--여기에 글쓰기 폼 컴포넌트 삽입-->
+        <div class="row">        
+        
+	<div class="col-md-12 p-4 text-info">Loading Board...</div>        
+
+        <div  class="col-md-12 p-4" style="height:600px;overflow-y:auto">        
+            <ul class="media-list p-3" style="border:1px solid silver">
+              <li class="media m-2 p-2" style="border-bottom:1px solid silver;background:#e9ecef">
+                <a class="pull-left mr-5" href="#"> 첨부 파일명
+                    <img  src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" 
+                     height="64" width="64" class="media-object center-block img-circle img-responsive">
+                    
+                    <img  height="64" width="64" class="media-object center-block img-circle img-responsive">
+                     <br>
+                  <span>작성자</span>
+                </a>  
+                    
+                <div class="media-body text-left">
+                  <h4 class="media-heading">제목</h4>
+                  <p>글 내용
+                  </p>
+                  <span class="badge badge-success">작성일</span>
+                  <span><a><i class="fa fa-1x fa-fw fa-heart"></i></a></span>
+                  <span><a><i class="fa fa-1x fa-fw fa-hand-o-down"></i></a></span>
+                  <span><a><i class="fa fa-1x fa-fw fa-edit"></i></a></span>
+                  <span><a><i class="fa fa-1x fa-fw fa-trash-o"></i></a></span>
+                </div>
+              </li>              
+            </ul>
+        </div> 
+        </div> <!-- row end->
+    </div><!-- container end->
+====================================================================
+
+====================================================================
+# scss 관련 모듈 설치
+npm install --save-dev node-sass sass-loader
+==로딩 이미지 transition css==================================================================
+<template>
+	...중략
+    <transition name="fade">
+      <div class="loading" v-show="loading">
+        <span class="fa fa-spinner fa-spin"></span> Loading
+      </div>
+    </transition>
+     ....
+</template>
+
+
+<style lang="scss" scoped>
+$purple: #5c4084;
+
+body {
+  background-color:  #5c4084;
+  padding: 50px;
+}
+.container {
+  padding: 40px 80px 15px 80px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 800px;
+}
+.heading {
+  text-align: center;
+  h1 {
+    background: -webkit-linear-gradient(#fff, #999);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
+    margin: 0 0 5px 0;
+    font-weight: 900;
+    font-size: 4rem;
+    color: #fff;
+  }
+  h4 {
+    color: lighten(#5c3d86,30%);
+    text-align: center;
+    margin: 0 0 35px 0;
+    font-weight: 400;
+    font-size: 24px;
+  }
+}
+
+.list-group-wrapper {
+  position: relative;
+}
+.list-group {
+  overflow: auto;
+  height: 50vh;
+  border: 2px solid #dce4ec;
+  border-radius: 5px;
+}
+.list-group-item {
+  margin-top: 1px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 2px solid #dce4ec;
+}
+.loading {
+  text-align: center;
+  position: absolute;
+  color: #fff;
+  z-index: 9;
+  background: $purple;
+  padding: 8px 18px;
+  border-radius: 5px;
+  left: calc(50% - 45px);
+  top: calc(50% - 18px);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+</style>
+
+====================================================================
